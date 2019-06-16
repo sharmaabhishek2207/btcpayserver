@@ -1,0 +1,36 @@
+﻿@{
+Layout = "/Views/Shared/_Layout.cshtml";
+ViewBag.ShowMenu = ViewBag.ShowMenu ?? true;
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="section-heading">@ViewData["MainTitle"]: @ViewData["Title"]</h4>
+                <hr class="primary ml-0">
+            </div>
+        </div>
+
+        <div>
+            <div class="row">
+                <div class="col-md-3">
+                    @if (ViewBag.ShowMenu)
+                    {
+                    @await Html.PartialAsync("_Nav")
+                    }
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section HeadScripts {
+@RenderSection("HeadScripts", required: false)
+}
+
+@section Scripts {
+@RenderSection("Scripts", required: false)
+}

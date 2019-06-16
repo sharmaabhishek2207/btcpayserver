@@ -1,0 +1,42 @@
+﻿@model BTCPayServer.Services.PoliciesSettings
+@{
+    ViewData.SetActivePageAndTitle(ServerNavPages.Policies);
+}
+
+
+<partial name="_StatusMessage" for="@TempData["StatusMessage"]" />
+@if (!this.ViewContext.ModelState.IsValid)
+{
+<div class="row">
+    <div class="col-lg-6">
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+</div>
+}
+<div class="row">
+    <div class="col-lg-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="RequiresConfirmedEmail"></label>
+                <input asp-for="RequiresConfirmedEmail" type="checkbox" class="form-check-inline" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LockSubscription"></label>
+                <input asp-for="LockSubscription" type="checkbox" class="form-check-inline" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscourageSearchEngines"></label>
+                <input asp-for="DiscourageSearchEngines" type="checkbox" class="form-check-inline" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RootAppId"></label>
+                <select asp-for="RootAppId" asp-items="ViewBag.AppsList" class="form-control"></select>
+            </div>
+            <button type="submit" class="btn btn-primary" name="command" value="Save">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

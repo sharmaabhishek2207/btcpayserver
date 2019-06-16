@@ -1,0 +1,22 @@
+﻿@model string
+
+@if (!string.IsNullOrEmpty(Model))
+{
+    var parsedModel = new StatusMessageModel(Model);
+    <div class="alert alert-@parsedModel.SeverityCSS @(parsedModel.AllowDismiss? "alert-dismissible":"" )" role="alert">
+        @if (parsedModel.AllowDismiss)
+        {
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        }
+        @if (!string.IsNullOrEmpty(parsedModel.Message))
+        {
+            @parsedModel.Message
+        }
+        @if (!string.IsNullOrEmpty(parsedModel.Html))
+        {
+            @Html.Raw(parsedModel.Html)
+        }
+    </div>
+}
